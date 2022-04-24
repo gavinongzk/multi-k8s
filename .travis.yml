@@ -3,22 +3,22 @@ services:
   - docker
 
 before_install:
-  - docker build -t gavinong/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t gavinongzk/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true gavinong/react-test npm test -- --coverage
+  - docker run -e CI=true gavinongzk/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t gavinong/multi-client ./client
-  - docker build -t gavinong/multi-nginx ./nginx
-  - docker build -t gavinong/multi-server ./server
-  - docker build -t gavinong/multi-worker ./worker
+  - docker build -t gavinongzk/multi-client ./client
+  - docker build -t gavinongzk/multi-nginx ./nginx
+  - docker build -t gavinongzk/multi-server ./server
+  - docker build -t gavinongzk/multi-worker ./worker
 
   # Log in to docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
   # push to Dockerhub
-  - docker push gavinong/multi-client
-  - docker push gavinong/multi-nginx
-  - docker push gavinong/multi-server
-  - docker push gavinong/multi-worker
+  - docker push gavinongzk/multi-client
+  - docker push gavinongzk/multi-nginx
+  - docker push gavinongzk/multi-server
+  - docker push gavinongzk/multi-worker
